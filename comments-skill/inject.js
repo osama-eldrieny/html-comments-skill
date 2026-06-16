@@ -346,6 +346,43 @@
       padding-bottom: 8px;
     }
 
+    /* REPLY COLLAPSE */
+    .hct-reply-collapse-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: #94a3b8;
+      padding: 2px;
+      transition: all 0.2s;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hct-reply-collapse-btn:hover {
+      color: #475569;
+    }
+
+    .hct-reply-collapse-icon {
+      transition: transform 0.2s;
+    }
+
+    .hct-reply-collapse-btn.collapsed .hct-reply-collapse-icon {
+      transform: rotate(-90deg);
+    }
+
+    .hct-reply-content {
+      max-height: 1000px;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .hct-reply-content.collapsed {
+      max-height: 0;
+    }
+
     /* COMMENT ACTIONS */
     .hct-comment-actions {
       display: flex;
@@ -675,14 +712,19 @@ const renderSidebar = () => {
           const statusText = replyStatus === 'pending-apply' ? 'Pending Apply' : replyStatus.charAt(0).toUpperCase() + replyStatus.slice(1);
 
           html += `
-            <div class="hct-reply">
+            <div class="hct-reply" data-reply-id="${reply.id}">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                <span class="hct-reply-author">${escapeHtml(reply.author)}:</span>
+                <div style="display: flex; align-items: center; gap: 6px; flex: 1;">
+                  <button class="hct-reply-collapse-btn" onclick="event.stopPropagation(); HCT.toggleReplyCollapse('${comment.id}', '${reply.id}')" title="Collapse/Expand"><svg class="hct-reply-collapse-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+                  <span class="hct-reply-author">${escapeHtml(reply.author)}:</span>
+                </div>
                 ${isAIReply ? '' : `<div class="hct-comment-status ${statusClass}" style="font-size: 11px; padding: 2px 6px;">${statusText}</div>`}
               </div>
-              <div class="hct-reply-text">${escapeHtml(reply.text)}</div>
-              <div style="font-size: 11px; color: #999; margin-top: 2px; margin-bottom: 8px;">${getRelativeTime(reply.created_at)}</div>
-              ${isAIReply ? '' : `<button class="hct-comment-btn" onclick="HCT.toggleReplyApply('${comment.id}', '${reply.id}')" style="font-size: 11px; padding: 4px 8px;">${replyStatus === 'pending-apply' ? 'Cancel' : 'Ready to Apply'}</button>`}
+              <div class="hct-reply-content" data-reply-collapsed="${reply.id}">
+                <div class="hct-reply-text">${escapeHtml(reply.text)}</div>
+                <div style="font-size: 11px; color: #999; margin-top: 2px; margin-bottom: 8px;">${getRelativeTime(reply.created_at)}</div>
+                ${isAIReply ? '' : `<button class="hct-comment-btn" onclick="HCT.toggleReplyApply('${comment.id}', '${reply.id}')" style="font-size: 11px; padding: 4px 8px;">${replyStatus === 'pending-apply' ? 'Cancel' : 'Ready to Apply'}</button>`}
+              </div>
             </div>
           `;
         });
@@ -697,14 +739,25 @@ const renderSidebar = () => {
   // Save state before re-rendering
   const sidebarContent = document.getElementById('hct-sidebar-content');
   let collapsedStates = {};
+  let replyCollapsedStates = {};
   let scrollPosition = 0;
 
   if (sidebarContent) {
     scrollPosition = sidebarContent.scrollTop;
+    // Save comment collapsed states
     document.querySelectorAll('[data-comment-id]').forEach(card => {
       const commentId = card.getAttribute('data-comment-id');
       const isCollapsed = card.classList.contains('hct-comment-collapsed');
       collapsedStates[commentId] = isCollapsed;
+    });
+    // Save reply collapsed states
+    document.querySelectorAll('[data-reply-id]').forEach(reply => {
+      const replyId = reply.getAttribute('data-reply-id');
+      const content = reply.querySelector('[data-reply-collapsed]');
+      if (content) {
+        const isCollapsed = content.classList.contains('collapsed');
+        replyCollapsedStates[replyId] = isCollapsed;
+      }
     });
   }
 
@@ -712,6 +765,7 @@ const renderSidebar = () => {
 
   // Restore collapsed states
   setTimeout(() => {
+    // Restore comment collapsed states
     Object.entries(collapsedStates).forEach(([commentId, wasCollapsed]) => {
       if (wasCollapsed) {
         const content = document.querySelector(`[data-collapsed="${commentId}"]`);
@@ -721,6 +775,18 @@ const renderSidebar = () => {
           content.classList.add('collapsed');
           btn.classList.add('collapsed');
           card.classList.add('hct-comment-collapsed');
+        }
+      }
+    });
+
+    // Restore reply collapsed states
+    Object.entries(replyCollapsedStates).forEach(([replyId, wasCollapsed]) => {
+      if (wasCollapsed) {
+        const content = document.querySelector(`[data-reply-collapsed="${replyId}"]`);
+        const btn = document.querySelector(`[data-reply-id="${replyId}"] .hct-reply-collapse-btn`);
+        if (content && btn) {
+          content.classList.add('collapsed');
+          btn.classList.add('collapsed');
         }
       }
     });
@@ -849,6 +915,15 @@ const renderSidebar = () => {
       content.classList.toggle('collapsed');
       btn.classList.toggle('collapsed');
       card.classList.toggle('hct-comment-collapsed');
+    }
+  };
+
+  window.HCT.toggleReplyCollapse = (commentId, replyId) => {
+    const content = document.querySelector(`[data-reply-collapsed="${replyId}"]`);
+    const btn = document.querySelector(`[data-reply-id="${replyId}"] .hct-reply-collapse-btn`);
+    if (content && btn) {
+      content.classList.toggle('collapsed');
+      btn.classList.toggle('collapsed');
     }
   };
 
