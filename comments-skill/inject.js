@@ -355,8 +355,16 @@
       padding-bottom: 8px;
     }
 
+    .hct-comment-time {
+      transition: opacity 0.3s ease, max-height 0.3s ease;
+      max-height: 100%;
+      opacity: 1;
+    }
+
     .hct-comment-collapsed .hct-comment-time {
-      display: none;
+      max-height: 0;
+      opacity: 0;
+      pointer-events: none;
     }
 
     /* REPLY COLLAPSE */
@@ -395,8 +403,16 @@
       height: 45px;
     }
 
+    .hct-reply-time {
+      transition: opacity 0.3s ease, max-height 0.3s ease;
+      max-height: 100%;
+      opacity: 1;
+    }
+
     .hct-reply.collapsed .hct-reply-time {
-      display: none;
+      max-height: 0;
+      opacity: 0;
+      pointer-events: none;
     }
 
     .hct-reply-content {
