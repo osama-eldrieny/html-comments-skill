@@ -706,16 +706,20 @@ const renderSidebar = () => {
 
       html += `
         <div class="hct-comment-card" data-comment-id="${comment.id}" style="cursor: default;">
-          <div class="hct-comment-header" onclick="HCT.highlightCommentElement('${comment.id}')" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-            <div style="display: flex; align-items: center; gap: 8px; flex: 1;">
-              <span class="hct-comment-badge">${idx + 1}</span>
-              <span class="hct-comment-author">${escapeHtml(comment.author)}</span>
-              <span class="hct-comment-time">${getRelativeTime(comment.created_at)}</span>
+          <div class="hct-comment-header" onclick="HCT.highlightCommentElement('${comment.id}')" style="cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+            <div style="display: flex; flex-direction: column; gap: 2px; flex: 1;">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span class="hct-comment-badge">${idx + 1}</span>
+                <span class="hct-comment-author">${escapeHtml(comment.author)}</span>
+              </div>
+              <span class="hct-comment-time" style="font-size: 11px;">${getRelativeTime(comment.created_at)}</span>
             </div>
-            <button class="hct-collapse-btn" onclick="event.stopPropagation(); HCT.toggleCommentCollapse('${comment.id}')" title="Collapse/Expand"><svg class="hct-collapse-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <div class="hct-comment-status ${statusClass}" style="font-size: 11px; padding: 2px 6px;">${statusText}</div>
+              <button class="hct-collapse-btn" onclick="event.stopPropagation(); HCT.toggleCommentCollapse('${comment.id}')" title="Collapse/Expand"><svg class="hct-collapse-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+            </div>
           </div>
           <div class="hct-comment-content" data-collapsed="${comment.id}">
-            <div class="hct-comment-status ${statusClass}">${statusText}</div>
             <div class="hct-comment-text">${escapeHtml(comment.text)}</div>
             <div class="hct-comment-actions">
               <button class="hct-comment-btn" onclick="HCT.toggleReply('${comment.id}')">Reply</button>
@@ -733,17 +737,22 @@ const renderSidebar = () => {
 
           html += `
             <div class="hct-reply" data-reply-id="${reply.id}">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                <div style="display: flex; align-items: center; gap: 6px; flex: 1;">
-                  <span class="hct-reply-author">${escapeHtml(reply.author)}:</span>
-                  ${isAIReply ? '' : `<div class="hct-comment-status ${statusClass}" style="font-size: 11px; padding: 2px 6px;">${statusText}</div>`}
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                <div style="display: flex; flex-direction: column; gap: 2px; flex: 1;">
+                  <span class="hct-reply-author" style="font-weight: 500;">${escapeHtml(reply.author)}</span>
+                  <span class="hct-reply-time" style="font-size: 11px; color: #999;">${getRelativeTime(reply.created_at)}</span>
                 </div>
-                <button class="hct-reply-collapse-btn" onclick="event.stopPropagation(); HCT.toggleReplyCollapse('${comment.id}', '${reply.id}')" title="Collapse/Expand"><svg class="hct-reply-collapse-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  ${isAIReply ? '' : `<div class="hct-comment-status ${statusClass}" style="font-size: 11px; padding: 2px 6px;">${statusText}</div>`}
+                  <button class="hct-reply-collapse-btn" onclick="event.stopPropagation(); HCT.toggleReplyCollapse('${comment.id}', '${reply.id}')" title="Collapse/Expand"><svg class="hct-reply-collapse-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+                </div>
               </div>
               <div class="hct-reply-content" data-reply-collapsed="${reply.id}">
                 <div class="hct-reply-text">${escapeHtml(reply.text)}</div>
-                <div style="font-size: 11px; color: #999; margin-top: 2px; margin-bottom: 8px;">${getRelativeTime(reply.created_at)}</div>
-                ${isAIReply ? '' : `<button class="hct-comment-btn" onclick="HCT.toggleReplyApply('${comment.id}', '${reply.id}')" style="font-size: 11px; padding: 4px 8px;">${replyStatus === 'pending-apply' ? 'Cancel' : 'Ready to Apply'}</button>`}
+                <div style="margin-top: 8px; display: flex; gap: 6px;">
+                  ${isAIReply ? '' : `<button class="hct-comment-btn" onclick="HCT.toggleReplyApply('${comment.id}', '${reply.id}')" style="font-size: 11px; padding: 4px 8px;">Ready to Apply</button>`}
+                  ${isAIReply ? '' : `<button class="hct-comment-btn" onclick="HCT.deleteReply('${comment.id}', '${reply.id}')" style="font-size: 11px; padding: 4px 8px; background: #fee2e2; color: #991b1b;">Delete</button>`}
+                </div>
               </div>
             </div>
           `;
@@ -954,6 +963,28 @@ const renderSidebar = () => {
         showToast('Comment deleted', 'success');
       })
       .catch(() => showToast('Error deleting comment', 'error'));
+  };
+
+  window.HCT.deleteReply = (commentId, replyId) => {
+    const comment = HCT.comments.find(c => c.id === commentId);
+    if (!comment || !comment.replies) return;
+
+    const replyIndex = comment.replies.findIndex(r => r.id === replyId);
+    if (replyIndex === -1) return;
+
+    comment.replies.splice(replyIndex, 1);
+
+    const replyElement = document.querySelector(`[data-reply-id="${replyId}"]`);
+    if (replyElement) {
+      replyElement.style.opacity = '0';
+      replyElement.style.transition = 'opacity 0.2s ease';
+      setTimeout(() => {
+        replyElement.remove();
+        showToast('Reply deleted', 'success');
+      }, 200);
+    } else {
+      showToast('Reply deleted', 'success');
+    }
   };
 
   window.HCT.toggleCommentCollapse = (commentId) => {
