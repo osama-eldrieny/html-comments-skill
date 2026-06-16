@@ -715,10 +715,10 @@ const renderSidebar = () => {
             <div class="hct-reply" data-reply-id="${reply.id}">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                 <div style="display: flex; align-items: center; gap: 6px; flex: 1;">
-                  <button class="hct-reply-collapse-btn" onclick="event.stopPropagation(); HCT.toggleReplyCollapse('${comment.id}', '${reply.id}')" title="Collapse/Expand"><svg class="hct-reply-collapse-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
                   <span class="hct-reply-author">${escapeHtml(reply.author)}:</span>
+                  ${isAIReply ? '' : `<div class="hct-comment-status ${statusClass}" style="font-size: 11px; padding: 2px 6px;">${statusText}</div>`}
                 </div>
-                ${isAIReply ? '' : `<div class="hct-comment-status ${statusClass}" style="font-size: 11px; padding: 2px 6px;">${statusText}</div>`}
+                <button class="hct-reply-collapse-btn" onclick="event.stopPropagation(); HCT.toggleReplyCollapse('${comment.id}', '${reply.id}')" title="Collapse/Expand"><svg class="hct-reply-collapse-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
               </div>
               <div class="hct-reply-content" data-reply-collapsed="${reply.id}">
                 <div class="hct-reply-text">${escapeHtml(reply.text)}</div>
