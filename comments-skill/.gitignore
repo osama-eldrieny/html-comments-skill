@@ -1,0 +1,6 @@
+node_modules/
+*.db
+comments.json
+.env
+.env.local
+.DS_Store

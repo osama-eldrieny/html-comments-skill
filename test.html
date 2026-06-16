@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProjectHub - Task Management Dashboard</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%232563eb' width='100' height='100'/><text x='50' y='60' font-size='60' font-weight='bold' text-anchor='middle' fill='white'>P</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Shadcn-style Button Component */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1rem;
+      font-weight: 500;
+      border-radius: 0.375rem;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: #2563eb;
+      color: white;
+    }
+    .btn-primary:hover {
+      background-color: #1d4ed8;
+    }
+    .btn-primary:active {
+      background-color: #1e40af;
+    }
+
+    .btn-secondary {
+      background-color: #f1f5f9;
+      color: #0f172a;
+    }
+    .btn-secondary:hover {
+      background-color: #e2e8f0;
+    }
+
+    .btn-ghost {
+      color: #0f172a;
+    }
+    .btn-ghost:hover {
+      background-color: #f1f5f9;
+    }
+
+    .btn-destructive {
+      background-color: #dc2626;
+      color: white;
+    }
+    .btn-destructive:hover {
+      background-color: #b91c1c;
+    }
+
+    .btn-outline {
+      border: 1.5px solid #2563eb;
+      color: #2563eb;
+      background: white;
+    }
+    .btn-outline:hover {
+      background-color: #dbeafe;
+      border-color: #1d4ed8;
+      color: #1d4ed8;
+      font-weight: 600;
+    }
+
+    .btn-sm {
+      padding: 0.375rem 0.75rem;
+      font-size: 0.875rem;
+    }
+
+    /* Shadcn-style Card */
+    .card {
+      background-color: white;
+      border-radius: 0.5rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .card-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-footer {
+      padding: 1.5rem;
+      border-top: 1px solid #e2e8f0;
+      background-color: #f8fafc;
+    }
+
+    /* Shadcn-style Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .badge-primary {
+      background-color: #dbeafe;
+      color: #1e40af;
+    }
+
+    .badge-success {
+      background-color: #dcfce7;
+      color: #166534;
+    }
+
+    .badge-warning {
+      background-color: #fef3c7;
+      color: #92400e;
+    }
+
+    .badge-destructive {
+      background-color: #fee2e2;
+      color: #991b1b;
+    }
+
+    .badge-secondary {
+      background-color: #f1f5f9;
+      color: #1e293b;
+    }
+
+    /* Shadcn-style Input */
+    .input {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.375rem;
+      background-color: white;
+      color: #0f172a;
+    }
+    .input:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    /* Shadcn-style Alert */
+    .alert {
+      border-radius: 0.5rem;
+      border: 1px solid;
+      padding: 1rem;
+    }
+
+    .alert-info {
+      border-color: #bfdbfe;
+      background-color: #eff6ff;
+      color: #1e3a8a;
+    }
+
+    .alert-success {
+      border-color: #bbf7d0;
+      background-color: #f0fdf4;
+      color: #166534;
+    }
+
+    .alert-warning {
+      border-color: #fcd34d;
+      background-color: #fffbeb;
+      color: #92400e;
+    }
+
+    /* Shadcn-style Progress */
+    .progress {
+      height: 0.5rem;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 9999px;
+      background-color: #e2e8f0;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background-color: #2563eb;
+      transition: width 0.3s;
+    }
+
+    /* Shadcn-style Separator */
+    .separator {
+      border-top: 1px solid #e2e8f0;
+    }
+
+    /* Shadcn-style Avatar */
+    .avatar {
+      height: 2.5rem;
+      width: 2.5rem;
+      border-radius: 9999px;
+      background-color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+
+    .avatar-sm {
+      height: 2rem;
+      width: 2rem;
+    }
+
+    /* Checkbox styling */
+    .checkbox {
+      width: 1rem;
+      height: 1rem;
+      border-radius: 0.25rem;
+      border: 1px solid #d1d5db;
+      cursor: pointer;
+    }
+
+    /* Skeleton loader */
+    .skeleton {
+      background-color: #e2e8f0;
+      border-radius: 0.375rem;
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    body {
+      color: #0f172a;
+    }
+
+    /* Tabs Component */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #e2e8f0;
+      gap: 0;
+    }
+
+    .tab {
+      padding: 1rem 1.5rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: #64748b;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .tab:hover {
+      color: #0f172a;
+    }
+
+    .tab.active {
+      color: #2563eb;
+      border-bottom-color: #2563eb;
+    }
+
+    /* Dropdown Menu */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background-color: white;
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      z-index: 1;
+      margin-top: 0.5rem;
+    }
+
+    .dropdown-content.show {
+      display: block;
+    }
+
+    .dropdown-item {
+      color: #1e293b;
+      padding: 0.75rem 1rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-size: 0.875rem;
+      transition: background-color 0.2s;
+    }
+
+    .dropdown-item:hover {
+      background-color: #f8fafc;
+    }
+
+    .dropdown-divider {
+      height: 1px;
+      background-color: #e2e8f0;
+      margin: 0.5rem 0;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background-color: #1e293b;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      animation: slideUp 0.3s ease;
+      z-index: 1000;
+    }
+
+    .toast.success {
+      background-color: #16a34a;
+      border-left: 4px solid #15803d;
+    }
+
+    .toast.error {
+      background-color: #dc2626;
+      border-left: 4px solid #b91c1c;
+    }
+
+    .toast.info {
+      background-color: #2563eb;
+      border-left: 4px solid #1d4ed8;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Table Component */
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    .table th {
+      background-color: #f8fafc;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      color: #0f172a;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .table td {
+      padding: 1rem;
+      border-bottom: 1px solid #f1f5f9;
+      color: #475569;
+    }
+
+    .table tbody tr:hover {
+      background-color: #f8fafc;
+    }
+
+    /* Status Badge */
+    .status-dot {
+      display: inline-block;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+
+    .status-dot.online {
+      background-color: #16a34a;
+    }
+
+    .status-dot.away {
+      background-color: #f59e0b;
+    }
+
+    .status-dot.offline {
+      background-color: #9ca3af;
+    }
+
+    /* Code Block */
+    .code-block {
+      background-color: #1e293b;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+    }
+
+    /* Tooltip */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: max-content;
+      background-color: #1e293b;
+      color: white;
+      text-align: center;
+      border-radius: 0.375rem;
+      padding: 0.5rem 0.75rem;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -50px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+
+    .tooltip .tooltiptext::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #1e293b transparent transparent transparent;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* Loading Spinner */
+    .spinner {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      border: 2px solid #e2e8f0;
+      border-top-color: #2563eb;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+  <!-- Sidebar + Main Layout -->
+  <div class="flex h-screen">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col">
+      <!-- Logo -->
+      <div class="px-6 py-6 border-b border-slate-200">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-white" data-lucide="layout-dashboard" stroke="currentColor" stroke-width="2" fill="none"></svg>
+          </div>
+          <span class="font-bold text-lg">ProjectHub</span>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="flex-1 px-4 py-6 space-y-2">
+        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-md bg-blue-50 text-blue-700 font-semibold text-base hover:bg-blue-100 transition-colors">
+          <svg class="w-5 h-5" data-lucide="layout-dashboard" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></svg>
+          Dashboard
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-md text-slate-900 font-medium text-base hover:bg-slate-100 transition-colors">
+          <svg class="w-5 h-5" data-lucide="check-square" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></svg>
+          Tasks
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-md text-slate-900 font-medium text-base hover:bg-slate-100 transition-colors">
+          <svg class="w-5 h-5" data-lucide="settings" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></svg>
+          Settings
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-md text-slate-900 font-medium text-base hover:bg-slate-100 transition-colors">
+          <svg class="w-5 h-5" data-lucide="users" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></svg>
+          Team
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-md text-slate-900 font-medium text-base hover:bg-slate-100 transition-colors">
+          <svg class="w-5 h-5" data-lucide="bar-chart-3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></svg>
+          Analytics
+        </a>
+      </nav>
+
+      <!-- User Profile -->
+      <div class="px-4 py-4 border-t border-slate-200">
+        <div class="flex items-center gap-3 p-3 rounded-md hover:bg-slate-100 cursor-pointer transition-colors">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop" alt="John Doe" class="w-10 h-10 rounded-full object-cover">
+          <div class="flex-1 min-w-0">
+            <p class="font-semibold text-sm truncate text-slate-900">John Doe</p>
+            <p class="text-xs text-slate-600 truncate">john@example.com</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-auto">
+      <!-- Header -->
+      <header class="bg-white border-b border-slate-200 sticky top-0 z-10">
+        <div class="px-8 py-6 flex items-center justify-between">
+          <div>
+            <div class="flex items-center gap-3">
+              <svg class="w-10 h-10 text-blue-600" data-lucide="layout-dashboard" stroke="currentColor" stroke-width="2" fill="none"></svg>
+              <h1 class="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Dashboard</h1>
+            </div>
+            <p class="text-slate-600 text-base mt-1">Welcome back! Here's what's happening with your projects.</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <input type="text" placeholder="Search..." class="input w-64">
+            <button class="btn btn-secondary">
+              <svg class="w-5 h-5" data-lucide="search" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></svg>
+            </button>
+            <div class="dropdown">
+              <button class="btn btn-secondary" onclick="this.nextElementSibling.classList.toggle('show')">
+                <svg class="w-5 h-5" data-lucide="bell" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></svg>
+              </button>
+              <div class="dropdown-content">
+                <div style="padding: 0.5rem 1rem; font-weight: 600; color: #0f172a; font-size: 0.875rem;">Notifications</div>
+                <div class="dropdown-divider"></div>
+                <button class="dropdown-item">
+                  <svg class="w-4 h-4" data-lucide="check-circle" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                  Task completed by Sarah
+                </button>
+                <button class="dropdown-item">
+                  <svg class="w-4 h-4" data-lucide="message-square" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                  New comment on Design Review
+                </button>
+                <button class="dropdown-item">
+                  <svg class="w-4 h-4" data-lucide="alert-circle" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                  Overdue task: Fix bugs in API
+                </button>
+                <div class="dropdown-divider"></div>
+                <button class="dropdown-item" style="justify-content: center; color: #2563eb;">
+                  View all notifications
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="p-8">
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          <div class="card">
+            <div class="card-content flex items-start justify-between">
+              <div>
+                <p class="text-slate-700 text-base font-semibold">Total Projects</p>
+                <p class="text-4xl font-bold mt-3 text-slate-900">12</p>
+                <p class="text-green-700 text-base font-medium mt-3">+2 this month</p>
+              </div>
+              <svg class="w-12 h-12 text-blue-500 flex-shrink-0 opacity-50" data-lucide="briefcase" stroke="currentColor" stroke-width="1.5" fill="none"></svg>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content flex items-start justify-between">
+              <div>
+                <p class="text-slate-700 text-base font-semibold">Active Tasks</p>
+                <p class="text-4xl font-bold mt-3 text-slate-900">34</p>
+                <p class="text-amber-700 text-base font-medium mt-3">8 overdue</p>
+              </div>
+              <svg class="w-12 h-12 text-amber-500 flex-shrink-0 opacity-50" data-lucide="list-check" stroke="currentColor" stroke-width="1.5" fill="none"></svg>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content flex items-start justify-between">
+              <div>
+                <p class="text-slate-700 text-base font-semibold">Team Members</p>
+                <p class="text-4xl font-bold mt-3 text-slate-900">24</p>
+                <p class="text-blue-700 text-base font-medium mt-3">+3 invited</p>
+              </div>
+              <svg class="w-12 h-12 text-purple-500 flex-shrink-0 opacity-50" data-lucide="users" stroke="currentColor" stroke-width="1.5" fill="none"></svg>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content flex items-start justify-between">
+              <div>
+                <p class="text-slate-700 text-base font-semibold">Completion Rate</p>
+                <p class="text-4xl font-bold mt-3 text-slate-900">87%</p>
+                <p class="text-green-700 text-base font-medium mt-3">↑ 5% from last week</p>
+              </div>
+              <svg class="w-12 h-12 text-green-500 flex-shrink-0 opacity-50" data-lucide="trending-up" stroke="currentColor" stroke-width="1.5" fill="none"></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="grid grid-cols-3 gap-8">
+          <!-- Tasks Section -->
+          <div>
+            <div class="card">
+              <div class="card-header flex items-center justify-between">
+                <h2 class="card-title">Recent Tasks</h2>
+                <button class="btn btn-outline btn-sm">New Task</button>
+              </div>
+              <div class="card-content">
+                <div class="space-y-4">
+                  <!-- Task Item 1 -->
+                  <div class="flex items-center gap-4 p-4 hover:bg-slate-50 rounded-lg cursor-pointer transition-colors border-2 border-slate-100">
+                    <input type="checkbox" class="checkbox">
+                    <div class="flex-1">
+                      <p class="font-semibold text-base text-slate-900">Design new landing page</p>
+                      <p class="text-base text-slate-600 mt-1">Due in 2 days • Web Design Project</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="badge badge-warning">In Progress</span>
+                      <div class="flex -space-x-2">
+                        <img src="https://ui-avatars.com/api/?name=John+Doe&background=2563eb&color=fff&size=32" alt="JD" class="w-8 h-8 rounded-full border-2 border-white">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=32&h=32&fit=crop" alt="SM" class="w-8 h-8 rounded-full border-2 border-white object-cover">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Task Item 2 -->
+                  <div class="flex items-center gap-4 p-4 hover:bg-slate-50 rounded-lg cursor-pointer transition-colors border-2 border-slate-100">
+                    <input type="checkbox" class="checkbox" checked>
+                    <div class="flex-1">
+                      <p class="font-semibold text-base text-slate-500 line-through">Review client feedback</p>
+                      <p class="text-base text-slate-600 mt-1">Completed • Marketing Campaign</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="badge badge-success">Completed</span>
+                      <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop" alt="AR" class="w-8 h-8 rounded-full object-cover">
+                    </div>
+                  </div>
+
+                  <!-- Task Item 3 -->
+                  <div class="flex items-center gap-4 p-4 hover:bg-slate-50 rounded-lg cursor-pointer transition-colors border-2 border-slate-100">
+                    <input type="checkbox" class="checkbox">
+                    <div class="flex-1">
+                      <p class="font-semibold text-base text-slate-900">Fix critical bugs in API</p>
+                      <p class="text-base text-slate-600 mt-1">Overdue by 1 day • Backend Development</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="badge badge-destructive">Overdue</span>
+                      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop" alt="RM" class="w-8 h-8 rounded-full object-cover">
+                    </div>
+                  </div>
+
+                  <!-- Task Item 4 -->
+                  <div class="flex items-center gap-4 p-4 hover:bg-slate-50 rounded-lg cursor-pointer transition-colors border-2 border-slate-100">
+                    <input type="checkbox" class="checkbox">
+                    <div class="flex-1">
+                      <p class="font-semibold text-base text-slate-900">Create documentation</p>
+                      <p class="text-base text-slate-600 mt-1">Due in 5 days • Documentation</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="badge badge-primary">Planned</span>
+                      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop" alt="KL" class="w-8 h-8 rounded-full object-cover">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Projects Card -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Active Projects</h3>
+            </div>
+            <div class="card-content space-y-4">
+              <div class="space-y-6">
+                <div>
+                  <div class="flex justify-between items-center mb-2">
+                    <p class="text-base font-semibold text-slate-900">Web Design</p>
+                    <span class="text-base font-semibold text-slate-900">75%</span>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar" style="width: 75%; background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 50%, #1e40af 100%);"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between items-center mb-2">
+                    <p class="text-base font-semibold text-slate-900">Mobile App</p>
+                    <span class="text-base font-semibold text-slate-900">45%</span>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar" style="width: 45%; background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #b45309 100%);"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between items-center mb-2">
+                    <p class="text-base font-semibold text-slate-900">API Development</p>
+                    <span class="text-base font-semibold text-slate-900">90%</span>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar" style="width: 90%; background: linear-gradient(135deg, #6ee7b7 0%, #10b981 50%, #047857 100%);"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between items-center mb-2">
+                    <p class="text-base font-semibold text-slate-900">UI/UX Research</p>
+                    <span class="text-base font-semibold text-slate-900">60%</span>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar" style="width: 60%; background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #1e3a8a 100%);"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between items-center mb-2">
+                    <p class="text-base font-semibold text-slate-900">Quality Assurance</p>
+                    <span class="text-base font-semibold text-slate-900">85%</span>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar" style="width: 85%; background: linear-gradient(135deg, #c4b5fd 0%, #8b5cf6 50%, #6b21a8 100%);"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Upcoming Deadlines -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Upcoming Deadlines</h3>
+            </div>
+            <div class="card-content space-y-3">
+              <div class="flex items-start gap-3 p-3 bg-slate-50 rounded-lg">
+                <svg class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" data-lucide="clock" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                <div class="flex-1">
+                  <p class="font-semibold text-base text-slate-900">Design Review</p>
+                  <p class="text-base text-slate-600 mt-1">Tomorrow at 2:00 PM</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 p-3 bg-slate-50 rounded-lg">
+                <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" data-lucide="alert-circle" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                <div class="flex-1">
+                  <p class="font-semibold text-base text-slate-900">Client Presentation</p>
+                  <p class="text-base text-slate-600 mt-1">Friday at 10:00 AM</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Components Section -->
+        <div class="mt-12 space-y-8">
+          <!-- Team Members Card -->
+          <div class="card">
+            <div class="card-header flex items-center justify-between">
+              <h2 class="card-title">Team Members</h2>
+              <button class="btn btn-primary btn-sm">
+                <svg class="w-4 h-4" data-lucide="plus" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                Add Member
+              </button>
+            </div>
+            <div class="card-content">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Tasks</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="flex items-center gap-3">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop" alt="John Doe" class="w-10 h-10 rounded-full object-cover">
+                        <div>
+                          <p class="font-semibold">John Doe</p>
+                          <p class="text-xs text-slate-500">john@example.com</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Project Lead</td>
+                    <td><span class="status-dot online"></span>Online</td>
+                    <td><span class="badge badge-primary">12 tasks</span></td>
+                    <td>
+                      <button class="btn btn-ghost" style="padding: 0.25rem 0.5rem;">
+                        <svg class="w-4 h-4" data-lucide="more-horizontal" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="flex items-center gap-3">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop" alt="Alice Roberts" class="w-10 h-10 rounded-full">
+                        <div>
+                          <p class="font-semibold">Alice Roberts</p>
+                          <p class="text-xs text-slate-500">alice@example.com</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Designer</td>
+                    <td><span class="status-dot away"></span>Away</td>
+                    <td><span class="badge badge-secondary">8 tasks</span></td>
+                    <td>
+                      <button class="btn btn-ghost" style="padding: 0.25rem 0.5rem;">
+                        <svg class="w-4 h-4" data-lucide="more-horizontal" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="flex items-center gap-3">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop" alt="Sarah Miller" class="w-10 h-10 rounded-full">
+                        <div>
+                          <p class="font-semibold">Sarah Miller</p>
+                          <p class="text-xs text-slate-500">sarah@example.com</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Developer</td>
+                    <td><span class="status-dot online"></span>Online</td>
+                    <td><span class="badge badge-success">15 tasks</span></td>
+                    <td>
+                      <button class="btn btn-ghost" style="padding: 0.25rem 0.5rem;">
+                        <svg class="w-4 h-4" data-lucide="more-horizontal" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Components Showcase -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Status & Indicators -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Status Indicators</h3>
+              </div>
+              <div class="card-content space-y-4">
+                <div class="flex items-center justify-between p-4 bg-slate-50 rounded-lg">
+                  <span class="font-medium">System Status</span>
+                  <div class="flex items-center gap-2">
+                    <span class="status-dot online"></span>
+                    <span class="text-sm font-medium">All systems operational</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-slate-50 rounded-lg">
+                  <span class="font-medium">API Status</span>
+                  <div class="flex items-center gap-2">
+                    <span class="status-dot online"></span>
+                    <span class="text-sm font-medium">Stable</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-slate-50 rounded-lg">
+                  <span class="font-medium">Database</span>
+                  <div class="flex items-center gap-2">
+                    <span class="status-dot online"></span>
+                    <span class="text-sm font-medium">Connected</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-slate-50 rounded-lg">
+                  <span class="font-medium">Backup Service</span>
+                  <div class="flex items-center gap-2">
+                    <span class="status-dot away"></span>
+                    <span class="text-sm font-medium">Maintenance</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Code Example -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Installation Guide</h3>
+              </div>
+              <div class="card-content">
+                <div class="code-block">
+npm install tailwindcss lucide-react
+npx tailwindcss init
+
+// In your HTML:
+&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;
+&lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt;
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alerts & Notifications -->
+          <div class="space-y-4">
+            <h2 class="text-2xl font-bold text-slate-900">Notifications</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+              <div class="alert alert-info">
+                <div class="flex gap-3">
+                  <svg class="w-5 h-5 flex-shrink-0" data-lucide="info" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                  <div>
+                    <p class="font-semibold">Information</p>
+                    <p class="text-sm mt-1">This is an informational message.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="alert alert-success">
+                <div class="flex gap-3">
+                  <svg class="w-5 h-5 flex-shrink-0" data-lucide="check-circle" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                  <div>
+                    <p class="font-semibold">Success</p>
+                    <p class="text-sm mt-1">Operation completed successfully!</p>
+                  </div>
+                </div>
+              </div>
+              <div class="alert alert-warning">
+                <div class="flex gap-3">
+                  <svg class="w-5 h-5 flex-shrink-0" data-lucide="alert-triangle" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                  <div>
+                    <p class="font-semibold">Warning</p>
+                    <p class="text-sm mt-1">Please review this action before proceeding.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Buttons Showcase -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Button Variants</h3>
+            </div>
+            <div class="card-content">
+              <div class="flex flex-wrap gap-4">
+                <button class="btn btn-primary">
+                  <svg class="w-4 h-4" data-lucide="check" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                  Primary
+                </button>
+                <button class="btn btn-secondary">
+                  <svg class="w-4 h-4" data-lucide="download" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                  Secondary
+                </button>
+                <button class="btn btn-outline">
+                  <svg class="w-4 h-4" data-lucide="external-link" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                  Outline
+                </button>
+                <button class="btn btn-ghost">
+                  <svg class="w-4 h-4" data-lucide="help-circle" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                  Ghost
+                </button>
+                <button class="btn btn-destructive">
+                  <svg class="w-4 h-4" data-lucide="trash-2" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                  Delete
+                </button>
+                <button class="btn btn-primary btn-sm">
+                  <svg class="w-3 h-3" data-lucide="plus" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                  Small
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!event.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown-content.show').forEach(el => {
+          el.classList.remove('show');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

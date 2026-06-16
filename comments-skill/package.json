@@ -1,0 +1,39 @@
+{
+  "name": "html-comments-skill",
+  "version": "1.0.0",
+  "description": "Lightweight collaborative HTML commenting skill with Claude Code integration",
+  "author": {
+    "name": "Osama Eldrieny",
+    "url": "https://www.osamaeldrieny.com/"
+  },
+  "license": "MIT",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "comments",
+    "html",
+    "feedback",
+    "collaboration",
+    "claude",
+    "ai",
+    "bookmarklet"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/html-comments-skill"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
