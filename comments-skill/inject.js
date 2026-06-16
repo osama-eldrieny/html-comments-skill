@@ -461,7 +461,6 @@
       font-weight: 700;
       color: #0f172a;
       font-size: 13px;
-      margin-bottom: 4px;
     }
 
     .hct-reply-text {
@@ -744,7 +743,7 @@ const renderSidebar = () => {
           html += `
             <div class="hct-reply" data-reply-id="${reply.id}">
               <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-                <div style="display: flex; flex-direction: column; gap: 2px; flex: 1;">
+                <div style="display: flex; flex-direction: column; flex: 1;">
                   <span class="hct-reply-author" style="font-weight: 500;">${escapeHtml(reply.author)}</span>
                   <span class="hct-reply-time" style="font-size: 11px; color: #999;">${getRelativeTime(reply.created_at)}</span>
                 </div>
