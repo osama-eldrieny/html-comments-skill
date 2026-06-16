@@ -747,8 +747,11 @@ const renderSidebar = () => {
     // Save comment collapsed states
     document.querySelectorAll('[data-comment-id]').forEach(card => {
       const commentId = card.getAttribute('data-comment-id');
-      const isCollapsed = card.classList.contains('hct-comment-collapsed');
-      collapsedStates[commentId] = isCollapsed;
+      const content = card.querySelector('[data-collapsed]');
+      const isCollapsed = content && content.classList.contains('collapsed');
+      if (isCollapsed) {
+        collapsedStates[commentId] = true;
+      }
     });
     // Save reply collapsed states
     document.querySelectorAll('[data-reply-id]').forEach(reply => {
@@ -763,8 +766,8 @@ const renderSidebar = () => {
 
   sidebar.innerHTML = html;
 
-  // Restore collapsed states
-  setTimeout(() => {
+  // Restore collapsed states using requestAnimationFrame for better timing
+  requestAnimationFrame(() => {
     // Restore comment collapsed states
     Object.entries(collapsedStates).forEach(([commentId, wasCollapsed]) => {
       if (wasCollapsed) {
@@ -796,7 +799,7 @@ const renderSidebar = () => {
     if (newSidebarContent) {
       newSidebarContent.scrollTop = scrollPosition;
     }
-  }, 0);
+  });
 
   window.HCT.toggleReply = (commentId) => {
     const textarea = document.querySelector(`[data-reply-id="${commentId}"]`);
