@@ -267,7 +267,6 @@
       font-weight: 700;
       color: #0f172a;
       font-size: 14px;
-      margin-bottom: 2px;
     }
 
     .hct-comment-time {
