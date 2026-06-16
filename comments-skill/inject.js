@@ -394,7 +394,7 @@
     }
 
     .hct-reply.collapsed {
-      height: 50px;
+      height: 45px;
     }
 
     .hct-reply.collapsed .hct-reply-time {
