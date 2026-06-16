@@ -357,6 +357,10 @@
       padding-bottom: 8px;
     }
 
+    .hct-comment-collapsed .hct-comment-time {
+      display: none;
+    }
+
     /* REPLY COLLAPSE */
     .hct-reply-collapse-btn {
       background: transparent;
@@ -391,6 +395,10 @@
 
     .hct-reply.collapsed {
       height: 50px;
+    }
+
+    .hct-reply.collapsed .hct-reply-time {
+      display: none;
     }
 
     .hct-reply-content {
