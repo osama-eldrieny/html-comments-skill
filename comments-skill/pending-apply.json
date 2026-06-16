@@ -1,6 +1,6 @@
 [
   {
-    "id": "c_1781639132239_whqobi",
+    "id": "c_1781639188509_bvayj9",
     "page_url": "file:///Users/oo/Desktop/Comments%20skill/test.html",
     "html_file_path": "../file:/Users/oo/Desktop/Comments%20skill/test.html",
     "element_selector": "body > div > main > div > div",
@@ -63,14 +63,14 @@
       ],
       "id": null
     },
-    "pin_x": 24.433656957928804,
-    "pin_y": 29.01234567901235,
+    "pin_x": 50.10787486515642,
+    "pin_y": 27.160493827160494,
     "author": "Osama",
-    "text": "Remove the icons from the cards inside this section",
+    "text": "make icons inside cards in this section bigger and make opacity icons 100%",
     "status": "pending-apply",
     "scope": "element",
     "apply_to": "element-only",
-    "created_at": "2026-06-16T19:45:32.239Z",
+    "created_at": "2026-06-16T19:46:28.509Z",
     "replies": []
   }
 ]
