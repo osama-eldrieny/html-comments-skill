@@ -751,7 +751,7 @@ const renderSidebar = () => {
                 <div class="hct-reply-text">${escapeHtml(reply.text)}</div>
                 <div style="margin-top: 8px; display: flex; gap: 6px;">
                   ${isAIReply ? '' : `<button class="hct-comment-btn" onclick="HCT.toggleReplyApply('${comment.id}', '${reply.id}')" style="font-size: 11px; padding: 4px 8px;">Ready to Apply</button>`}
-                  ${isAIReply ? '' : `<button class="hct-comment-btn" onclick="HCT.deleteReply('${comment.id}', '${reply.id}')" style="font-size: 11px; padding: 4px 8px; background: #fee2e2; color: #991b1b;">Delete</button>`}
+                  ${isAIReply ? '' : `<button class="hct-comment-btn" onclick="HCT.deleteReply('${comment.id}', '${reply.id}')" style="font-size: 11px; padding: 4px 8px;">Delete</button>`}
                 </div>
               </div>
             </div>
