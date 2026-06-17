@@ -23,13 +23,204 @@
       HCT.author = stored;
       init();
     } else {
-      const name = prompt('What is your name? (for comments)');
-      if (name && name.trim()) {
-        HCT.author = name.trim();
-        localStorage.setItem('hct_author', HCT.author);
-        init();
-      }
+      showAuthorModal();
     }
+  };
+
+  const showAuthorModal = () => {
+    injectAuthorModalStyles();
+    const modal = document.createElement('div');
+    modal.id = 'hct-author-modal-overlay';
+    modal.innerHTML = `
+      <div id="hct-author-modal">
+        <div id="hct-author-modal-content">
+          <h2>Welcome to Comments Skill</h2>
+          <p>What's your name? We'll use it to identify your comments.</p>
+          <input
+            id="hct-author-input"
+            type="text"
+            placeholder="Enter your name..."
+            autofocus
+          />
+          <div id="hct-author-modal-actions">
+            <button id="hct-author-cancel" class="hct-author-btn secondary">Cancel</button>
+            <button id="hct-author-submit" class="hct-author-btn primary">Continue</button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    const input = document.getElementById('hct-author-input');
+    const submitBtn = document.getElementById('hct-author-submit');
+    const cancelBtn = document.getElementById('hct-author-cancel');
+
+    const handleSubmit = () => {
+      const name = input.value.trim();
+      if (name) {
+        HCT.author = name;
+        localStorage.setItem('hct_author', HCT.author);
+        modal.remove();
+        init();
+      } else {
+        input.focus();
+        input.style.borderColor = '#dc2626';
+        setTimeout(() => {
+          input.style.borderColor = '#e2e8f0';
+        }, 2000);
+      }
+    };
+
+    const handleCancel = () => {
+      modal.remove();
+    };
+
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') handleSubmit();
+    });
+
+    submitBtn.addEventListener('click', handleSubmit);
+    cancelBtn.addEventListener('click', handleCancel);
+
+    setTimeout(() => input.focus(), 100);
+  };
+
+  const injectAuthorModalStyles = () => {
+    const style = document.createElement('style');
+    style.textContent = `
+      #hct-author-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(15, 23, 42, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2147483649;
+        animation: hct-fade-in 0.3s ease;
+        backdrop-filter: blur(4px);
+      }
+
+      @keyframes hct-fade-in {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes hct-slide-up {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      #hct-author-modal {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 10px 30px rgba(0, 0, 0, 0.1);
+        animation: hct-slide-up 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        max-width: 420px;
+        width: 90%;
+      }
+
+      #hct-author-modal-content {
+        padding: 40px 32px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      }
+
+      #hct-author-modal h2 {
+        margin: 0 0 12px 0;
+        font-size: 24px;
+        font-weight: 700;
+        color: #0f172a;
+        letter-spacing: -0.5px;
+      }
+
+      #hct-author-modal p {
+        margin: 0 0 24px 0;
+        font-size: 14px;
+        color: #64748b;
+        line-height: 1.6;
+      }
+
+      #hct-author-input {
+        width: 100%;
+        padding: 12px 14px;
+        font-size: 14px;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 10px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        color: #0f172a;
+        margin-bottom: 24px;
+        transition: all 0.2s ease;
+        box-sizing: border-box;
+      }
+
+      #hct-author-input:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        background-color: #f0f9ff;
+      }
+
+      #hct-author-input::placeholder {
+        color: #cbd5e1;
+      }
+
+      #hct-author-modal-actions {
+        display: flex;
+        gap: 12px;
+        justify-content: flex-end;
+      }
+
+      .hct-author-btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+      }
+
+      .hct-author-btn.primary {
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        color: white;
+        box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+      }
+
+      .hct-author-btn.primary:hover {
+        background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+        box-shadow: 0 4px 16px rgba(37, 99, 235, 0.25);
+        transform: translateY(-1px);
+      }
+
+      .hct-author-btn.primary:active {
+        transform: translateY(0);
+      }
+
+      .hct-author-btn.secondary {
+        background: #f1f5f9;
+        color: #64748b;
+        border: 1px solid #e2e8f0;
+      }
+
+      .hct-author-btn.secondary:hover {
+        background: #e2e8f0;
+        color: #0f172a;
+      }
+    `;
+    document.head.appendChild(style);
   };
 
   const init = () => {
@@ -737,6 +928,11 @@ const renderToolbar = () => {
 
   document.getElementById('hct-btn-comment').addEventListener('click', togglePickMode);
   document.getElementById('hct-btn-toggle-toolbar').addEventListener('click', toggleToolbarCollapse);
+
+  // Restore sidebar state if toolbar is expanded
+  if (!isCollapsed) {
+    HCT.sidebarOpen = true;
+  }
 };
 
 const toggleToolbarCollapse = () => {
@@ -751,19 +947,22 @@ const toggleToolbarCollapse = () => {
     commentText.classList.remove('hct-toolbar-hidden');
     toggleIcon.innerHTML = '<path d="m20 17-5-5 5-5"/><path d="m4 17 5-5-5-5"/>';
     localStorage.setItem('hct_toolbar_collapsed', 'false');
-    toggleSidebar();
+    localStorage.setItem('hct_sidebar_open', 'true');
+    toggleSidebar(true);
   } else {
     // Collapse and close sidebar
     toolbar.classList.add('hct-toolbar-collapsed');
     commentText.classList.add('hct-toolbar-hidden');
     toggleIcon.innerHTML = '<path d="m9 7-5 5 5 5"/><path d="m15 7 5 5-5 5"/>';
     localStorage.setItem('hct_toolbar_collapsed', 'true');
-    closeSidebar();
+    localStorage.setItem('hct_sidebar_open', 'false');
+    closeSidebar(true);
   }
 };
 
 const renderSidebar = () => {
   let sidebar = document.getElementById('hct-sidebar');
+  const isNewSidebar = !sidebar;
   if (!sidebar) {
     sidebar = document.createElement('div');
     sidebar.id = 'hct-sidebar';
@@ -1110,6 +1309,17 @@ const renderSidebar = () => {
   window.HCT.highlightCommentElement = highlightCommentElement;
   window.HCT.removeElementHighlight = removeElementHighlight;
   window.HCT.closeSidebar = closeSidebar;
+
+  // Apply saved sidebar state on first render if toolbar is expanded
+  if (isNewSidebar) {
+    const toolbarCollapsed = localStorage.getItem('hct_toolbar_collapsed') !== 'false';
+    if (!toolbarCollapsed) {
+      // Toolbar is expanded, so sidebar should be open
+      sidebar.classList.add('open');
+      HCT.sidebarOpen = true;
+      document.body.classList.add('hct-sidebar-open');
+    }
+  }
 };
 
 const togglePickMode = () => {
@@ -1149,29 +1359,48 @@ const removeHighlight = () => {
   document.querySelectorAll('.hct-highlight').forEach(el => el.classList.remove('hct-highlight'));
 };
 
-const closeSidebar = () => {
+const closeSidebar = (persistState = false) => {
   const sidebar = document.getElementById('hct-sidebar');
   if (sidebar) {
     sidebar.classList.remove('open');
     document.body.classList.remove('hct-sidebar-open');
     HCT.sidebarOpen = false;
     removeElementHighlight();
+    if (persistState) {
+      localStorage.setItem('hct_sidebar_open', 'false');
+    }
   }
 };
 
-const toggleSidebar = () => {
+const toggleSidebar = (forceOpen = null) => {
   const sidebar = document.getElementById('hct-sidebar');
   if (!sidebar) renderSidebar();
   const sb = document.getElementById('hct-sidebar');
-  sb.classList.toggle('open');
-  HCT.sidebarOpen = sb.classList.contains('open');
 
-  // Add/remove margin from body to avoid content overlap
-  if (HCT.sidebarOpen) {
-    document.body.classList.add('hct-sidebar-open');
+  if (forceOpen !== null) {
+    // Force open or closed state
+    if (forceOpen) {
+      sb.classList.add('open');
+      HCT.sidebarOpen = true;
+      document.body.classList.add('hct-sidebar-open');
+    } else {
+      sb.classList.remove('open');
+      HCT.sidebarOpen = false;
+      document.body.classList.remove('hct-sidebar-open');
+      removeElementHighlight();
+    }
   } else {
-    document.body.classList.remove('hct-sidebar-open');
-    removeElementHighlight();
+    // Toggle state
+    sb.classList.toggle('open');
+    HCT.sidebarOpen = sb.classList.contains('open');
+
+    // Add/remove margin from body to avoid content overlap
+    if (HCT.sidebarOpen) {
+      document.body.classList.add('hct-sidebar-open');
+    } else {
+      document.body.classList.remove('hct-sidebar-open');
+      removeElementHighlight();
+    }
   }
 };
 
