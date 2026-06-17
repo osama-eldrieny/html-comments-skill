@@ -38,13 +38,34 @@ You'll see:
 📌 Bookmarklet page: http://localhost:3001/bookmarklet
 ```
 
-### Step 3: Install the Bookmarklet
+### Step 3: Enable Comments (Choose One Method)
+
+#### Method A: Using the Bookmarklet (Quick Testing)
 
 1. Open `http://localhost:3001/bookmarklet` in your browser
 2. **Drag the "HTML Comments" button to your bookmarks bar** (click and hold, then drag)
 3. The button should now appear in your browser's bookmarks
+4. On any page, click the bookmarklet to activate the comments UI
 
 **Tip:** The bookmarklet works like a browser bookmark — drag it to your toolbar for quick access.
+
+#### Method B: Direct Script Injection (Persistent)
+
+For persistent comments that survive page refreshes, add this script tag to your HTML `<head>` or before `</body>`:
+
+```html
+<!-- HTML Comments Skill: Enables the comments UI on page load.
+     Ensure the comments server is running on port 3001. -->
+<script src="http://localhost:3001/inject.js" defer></script>
+```
+
+This method:
+- ✅ Comments UI loads **automatically** on every page load
+- ✅ No need to click the bookmarklet each time
+- ✅ Comments persist across page refreshes
+- ✅ Perfect for development workflows
+
+**Choose this method if:** You want comments to always be available while developing.
 
 ### Step 4: Open Your Project in the Browser
 
