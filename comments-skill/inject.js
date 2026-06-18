@@ -929,26 +929,34 @@ const init = () => {
     .hct-toast {
       position: fixed;
       bottom: 24px;
-      right: 24px;
+      left: 50%;
+      transform: translateX(-50%);
       color: #1f2937;
       padding: 14px 20px;
       border-radius: 8px;
       font-size: 13px;
       font-weight: 500;
       z-index: 2147483648;
-      animation: toastSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: toastFadeIn 0.3s ease;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       background: #f5f5f5;
     }
 
-    @keyframes toastSlideIn {
+    @keyframes toastFadeIn {
       from {
-        transform: translateX(400px);
         opacity: 0;
       }
       to {
-        transform: translateX(0);
         opacity: 1;
+      }
+    }
+    
+    @keyframes toastFadeOut {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
       }
     }
 
@@ -1821,7 +1829,7 @@ const showToast = (msg, type = 'success') => {
   toast.textContent = msg;
   document.body.appendChild(toast);
   console.log('Toast created with class:', toast.className, 'Text:', msg);
-  setTimeout(() => toast.remove(), 15000);
+  setTimeout(() => toast.remove(), 3000);
 };
 
 const getRelativeTime = (isoString) => {
