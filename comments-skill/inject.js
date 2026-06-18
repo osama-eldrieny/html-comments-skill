@@ -443,7 +443,16 @@ const init = () => {
       font-size: 18px;
       font-weight: 700;
       color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 12px;
       letter-spacing: -0.5px;
+    }
+
+    #hct-sidebar-header h3:before {
+      content: '💬';
+      font-size: 20px;
+      opacity: 0.9;
     }
 
 
@@ -1116,13 +1125,6 @@ const renderSidebar = () => {
   let html = `
     <div id="hct-sidebar-header">
       <h3>Comments (${pageComments.length})</h3>
-      <button onclick="HCT.toggleSidebar(false)" title="Close sidebar" style="width: 32px; height: 32px;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect width="18" height="18" x="3" y="3" rx="2"/>
-          <path d="M9 3v18"/>
-          <path d="m16 15-3-3 3-3"/>
-        </svg>
-      </button>
     </div>
     <div id="hct-sidebar-content">
   `;
