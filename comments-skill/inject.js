@@ -19,18 +19,55 @@
 
   const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxIU_9jZkued8MPl6pgFDl7K71jlm48HQLuiFWGH06LUwiyMJsLkufoQePm5NQ68pZS/exec';
 
-  const getBackendUrl = () => {
+  let cachedBackendUrl = null;
+
+  const detectBackendUrl = async () => {
+    if (cachedBackendUrl) return cachedBackendUrl;
+
+    const cached = localStorage.getItem('hct_backend_url');
+    if (cached) {
+      cachedBackendUrl = cached;
+      return cached;
+    }
+
     const origin = window.location.origin;
-    if (origin === 'http://localhost:8000' || origin.startsWith('http://localhost:8')) {
-      return 'http://localhost:3001';
+    const isLocalhost = origin.includes('localhost') || origin.startsWith('file://');
+
+    if (!isLocalhost) {
+      cachedBackendUrl = origin;
+      return origin;
     }
-    if (origin.startsWith('file://')) {
-      return 'http://localhost:3001';
+
+    const commonPorts = [3001, 3000, 5000, 8000, 9000, 4000];
+    const baseUrl = origin.startsWith('file://') ? 'http://localhost' : origin.split(':').slice(0, 2).join(':');
+
+    for (const port of commonPorts) {
+      const url = `${baseUrl}:${port}`;
+      try {
+        const response = await fetch(`${url}/api/comments`, {
+          method: 'HEAD',
+          mode: 'no-cors',
+          timeout: 1000
+        });
+        cachedBackendUrl = url;
+        localStorage.setItem('hct_backend_url', url);
+        return url;
+      } catch (e) {
+        // Port not available, try next
+      }
     }
-    return origin;
+
+    cachedBackendUrl = baseUrl + ':3001';
+    localStorage.setItem('hct_backend_url', cachedBackendUrl);
+    return cachedBackendUrl;
   };
 
-  const initAuthor = () => {
+  const getBackendUrl = () => {
+    return cachedBackendUrl || localStorage.getItem('hct_backend_url') || 'http://localhost:3001';
+  };
+
+  const initAuthor = async () => {
+    await detectBackendUrl();
     const stored = localStorage.getItem('hct_author');
     if (stored) {
       HCT.author = stored;
