@@ -272,6 +272,7 @@
 const fetchGlobalCounter = async () => {
   try {
     const response = await fetch(`${getBackendUrl()}/api/global-counter`);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
     if (data.success) {
       const counterEl = document.getElementById('hct-counter-number');
@@ -1603,7 +1604,10 @@ const startAutoRefreshCheck = () => {
 
       const params = new URLSearchParams({ html_file_path: filePath });
       fetch(`${getBackendUrl()}/api/check-changes?${params}`)
-        .then(r => r.json())
+        .then(r => {
+          if (!r.ok) throw new Error(`HTTP ${r.status}`);
+          return r.json();
+        })
         .then(data => {
           if (!lastModified[filePath]) {
             lastModified[filePath] = data.lastModified;
@@ -2047,7 +2051,10 @@ window.HCT.submitComment = () => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
   })
-    .then(r => r.json())
+    .then(r => {
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      return r.json();
+    })
     .then(comment => {
       HCT.comments.push(comment);
       renderSidebar();
