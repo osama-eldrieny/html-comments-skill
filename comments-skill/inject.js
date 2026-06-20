@@ -555,6 +555,7 @@ const init = () => {
       padding: 60px 20px;
       text-align: center;
       color: #64748b;
+      height: 100%;
     }
 
     .hct-empty-state svg {
@@ -1033,13 +1034,17 @@ const init = () => {
 
     /* Global Counter Footer */
     #hct-global-counter {
-      padding: 12px 16px;
-      text-align: center;
+      padding: 16px;
+      text-align: left;
       font-size: 12px;
       font-weight: 500;
       color: #64748b;
       border-top: 1px solid #e2e8f0;
       margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
     }
 
     #hct-counter-number {
@@ -1051,6 +1056,24 @@ const init = () => {
       font-size: 11px;
       color: #94a3b8;
       margin-top: 6px;
+      width: 100%;
+    }
+
+    #hct-dog-mascot {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    #hct-counter-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: left;
     }
 
     #hct-global-counter a {
@@ -1252,9 +1275,12 @@ const renderSidebar = () => {
 
   html += `
     <div id="hct-global-counter">
-      🌍 <span id="hct-counter-number">0</span> comments worldwide
-      <div id="hct-counter-credits">
-        Made with ❤️ by Osama Eldrieny
+      <img id="hct-dog-mascot" src="http://localhost:8000/dog-mascot.png" alt="Pointer dog mascot">
+      <div id="hct-counter-text">
+        <div>🌍 <span id="hct-counter-number">0</span> comments worldwide</div>
+        <div id="hct-counter-credits">
+          Made with ❤️ by Osama Eldrieny
+        </div>
       </div>
     </div>
   `;
