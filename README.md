@@ -66,7 +66,9 @@ You'll see:
 📌 Bookmarklet page: http://localhost:3001/bookmarklet
 ```
 
-> ⚠️ **IMPORTANT: Keep this terminal open** — the comments server must stay running for the bookmarklet to work.
+<div style="background-color: #fff3cd; border: 2px solid #ffc107; border-radius: 8px; padding: 12px 16px; margin: 16px 0;">
+  <strong>⚠️ IMPORTANT: Keep this terminal open</strong> — the comments server must stay running for the bookmarklet to work.
+</div>
 
 ### Step 3: Enable Comments (Choose One Method)
 
