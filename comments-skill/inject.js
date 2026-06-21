@@ -895,36 +895,10 @@ const init = () => {
 
     /* ELEMENT HIGHLIGHT */
     .hct-highlight {
-      background:
-        linear-gradient(90deg, #2563eb 50%, transparent 50%),
-        linear-gradient(90deg, #9333ea 50%, transparent 50%),
-        linear-gradient(0deg, #7c3aed 50%, transparent 50%),
-        linear-gradient(0deg, #2563eb 50%, transparent 50%) !important;
-      background-repeat: repeat-x, repeat-x, repeat-y, repeat-y !important;
-      background-size: 15px 4px, 15px 4px, 4px 15px, 4px 15px !important;
-      background-position: 0 0, 100% 100%, 0 100%, 100% 0 !important;
-      background-color: transparent !important;
-      outline: none !important;
-      padding: 0 !important;
-      animation: hct-border-dance 3s infinite linear !important;
-    }
-
-    @keyframes hct-border-dance {
-      0% {
-        background-position: 0 0, 100% 100%, 0 100%, 100% 0;
-      }
-      25% {
-        background-position: -75px 0, calc(100% + 75px) 100%, 0 -75px, 100% 75px;
-      }
-      50% {
-        background-position: -150px 0, calc(100% + 150px) 100%, 0 -150px, 100% 150px;
-      }
-      75% {
-        background-position: -225px 0, calc(100% + 225px) 100%, 0 -225px, 100% 225px;
-      }
-      100% {
-        background-position: -300px 0, calc(100% + 300px) 100%, 0 -300px, 100% 300px;
-      }
+      outline: 3px dashed #2563eb !important;
+      outline-offset: -3px !important;
+      background-color: rgba(37, 99, 235, 0.08) !important;
+      box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.2) !important;
     }
 
     /* COMMENT POPOVER */
