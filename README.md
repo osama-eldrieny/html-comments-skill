@@ -116,9 +116,9 @@ You'll see:
 
 </br>
 
-### Step 4: Auto-Open Pointer on Every Page
+### Step 4: Setup Pointer for Easy Access
 
-Benefits:
+Benefits of this one-time setup:
 - ✅ Comments UI loads **automatically** on every page load
 - ✅ No need to click the bookmarklet each time
 - ✅ Comments persist across page refreshes
