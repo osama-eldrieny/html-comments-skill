@@ -898,29 +898,18 @@ const init = () => {
       outline: 3px dashed #2563eb !important;
       outline-offset: -3px !important;
       background-color: rgba(37, 99, 235, 0.08) !important;
-      animation: hct-border-color-gradient 3s ease-in-out infinite !important;
+      animation: hct-border-pulse 2s ease-in-out infinite !important;
     }
 
-    @keyframes hct-border-color-gradient {
+    @keyframes hct-border-pulse {
       0% {
-        outline-color: #2563eb !important;
-        box-shadow: inset 0 0 0 3px #2563eb, 0 0 0 0 rgba(37, 99, 235, 0.5) !important;
-      }
-      25% {
-        outline-color: #7c3aed !important;
-        box-shadow: inset 0 0 0 3px #7c3aed, 0 0 0 3px rgba(124, 58, 237, 0.4) !important;
+        box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.3), 0 0 4px rgba(37, 99, 235, 0.2) !important;
       }
       50% {
-        outline-color: #9333ea !important;
-        box-shadow: inset 0 0 0 3px #9333ea, 0 0 0 6px rgba(147, 51, 234, 0.3) !important;
-      }
-      75% {
-        outline-color: #7c3aed !important;
-        box-shadow: inset 0 0 0 3px #7c3aed, 0 0 0 3px rgba(124, 58, 237, 0.4) !important;
+        box-shadow: inset 0 0 8px rgba(37, 99, 235, 0.4), 0 0 12px rgba(37, 99, 235, 0.4) !important;
       }
       100% {
-        outline-color: #2563eb !important;
-        box-shadow: inset 0 0 0 3px #2563eb, 0 0 0 0 rgba(37, 99, 235, 0.5) !important;
+        box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.3), 0 0 4px rgba(37, 99, 235, 0.2) !important;
       }
     }
 
