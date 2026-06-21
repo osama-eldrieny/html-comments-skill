@@ -396,53 +396,44 @@ app.patch('/api/comments/:id', (req, res) => {
   // Manage pending-apply.json
   const pending = readPendingApply();
 
-  // Check if this is a reply-level apply
+  // Check what needs to be applied
   const hasReplyPending = comment.replies && comment.replies.some(r => r.status === 'pending-apply');
   const isCommentPending = comment.status === 'pending-apply';
 
   if (hasReplyPending || isCommentPending) {
-    // Comment should be in pending-apply.json (either for itself or for its replies)
+    // Support BOTH main comment and multiple replies to be applied together
     const existingIndex = pending.findIndex(p => p.id === id);
 
-    if (hasReplyPending) {
-      // At least one reply is pending-apply
-      const pendingReply = comment.replies.find(r => r.status === 'pending-apply');
-      const pendingEntry = {
-        id: comment.id,
-        apply_type: 'reply',
-        apply_reply_id: pendingReply.id,
-        original_comment: {
-          text: comment.text,
-          status: comment.status
-        },
-        replies: comment.replies,
-        element_selector: comment.element_selector,
-        element_snapshot: comment.element_snapshot,
-        html_file_path: comment.html_file_path,
-        page_url: comment.page_url,
-        author: comment.author,
-        created_at: comment.created_at,
-        pin_x: comment.pin_x,
-        pin_y: comment.pin_y
-      };
+    // Get all pending reply IDs
+    const pendingReplyIds = comment.replies
+      ? comment.replies
+          .filter(r => r.status === 'pending-apply')
+          .map(r => r.id)
+      : [];
 
-      if (existingIndex >= 0) {
-        pending[existingIndex] = pendingEntry;
-      } else {
-        pending.push(pendingEntry);
-      }
-    } else if (isCommentPending && !hasReplyPending) {
-      // Only the main comment is pending
-      const pendingEntry = {
-        ...comment,
-        status: 'pending-apply'
-      };
+    const pendingEntry = {
+      id: comment.id,
+      apply_comment: isCommentPending,
+      apply_reply_ids: pendingReplyIds,
+      original_comment: {
+        text: comment.text,
+        status: comment.status
+      },
+      replies: comment.replies,
+      element_selector: comment.element_selector,
+      element_snapshot: comment.element_snapshot,
+      html_file_path: comment.html_file_path,
+      page_url: comment.page_url,
+      author: comment.author,
+      created_at: comment.created_at,
+      pin_x: comment.pin_x,
+      pin_y: comment.pin_y
+    };
 
-      if (existingIndex >= 0) {
-        pending[existingIndex] = pendingEntry;
-      } else {
-        pending.push(pendingEntry);
-      }
+    if (existingIndex >= 0) {
+      pending[existingIndex] = pendingEntry;
+    } else {
+      pending.push(pendingEntry);
     }
 
     writePendingApply(pending);
