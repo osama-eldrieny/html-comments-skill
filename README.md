@@ -26,7 +26,9 @@ Quick, targeted feedback directly on HTML elements. No lengthy descriptions—ju
 🎨 **Visual highlighting** — See which elements have comments  
 📍 **Pin positions** — Comments follow elements during scroll/zoom  
 
-
+</br>
+</br>
+</br>
 
 ## Why Pointer?
 
@@ -44,7 +46,9 @@ Make this 24px
 2. 💬 Say "Make this 24px"
 3. ✨ Done — AI gets it instantly
 
-
+</br>
+</br>
+</br>
 
 ## Perfect for:
 
@@ -66,7 +70,9 @@ Fix issues directly with AI assistance, iterate on live pages in real-time, pair
 ⚡ **Team Leads**  
 Facilitate faster design reviews and feedback loops, reduce communication overhead across team
 
-
+</br>
+</br>
+</br>
 
 ## Quick Start
 
@@ -77,7 +83,8 @@ Facilitate faster design reviews and feedback loops, reduce communication overhe
 git clone https://github.com/osama-eldrieny/Pointer.git
 ```
 
-
+</br>
+</br>
 
 ### Step 2: Start the Comments Server (Terminal 1)
 
@@ -100,7 +107,8 @@ You'll see:
 </div>
 
 
-
+</br>
+</br>
 
 ### Step 3: Enable Comments (Choose One Method)
 
@@ -140,7 +148,8 @@ To make Pointer always open and survive page refreshes, add one of these script 
 </script>
 ```
 
-
+</br>
+</br>
 
 
 ### Step 4: Open Your Project in the Browser
@@ -153,7 +162,8 @@ To make Pointer always open and survive page refreshes, add one of these script 
 - **Static file:** Open `file:///path/to/your/project.html` (open HTML file directly without a server)
 
 
-
+</br>
+</br>
 
 ### Step 5: Start Commenting
 
@@ -165,7 +175,8 @@ To make Pointer always open and survive page refreshes, add one of these script 
 6. See **numbered pins** appear on the element
 
 
-
+</br>
+</br>
 
 ### Step 6: View & Manage Comments
 
@@ -177,7 +188,8 @@ To make Pointer always open and survive page refreshes, add one of these script 
    - **Read** full comment history with replies
 
 
-
+</br>
+</br>
 
 ### Step 7: Queue Changes for your AI Agent
 
@@ -188,7 +200,8 @@ When ready to apply a comment:
 3. If the comment has replies, you can mark individual replies instead
 4. The comment is now in the queue for your AI to process
 
-
+</br>
+</br>
 
 
 ### Step 8: Apply Changes with your AI Agent
@@ -220,7 +233,9 @@ Your AI agent will:
 
 **That's it!** Your HTML is now updated with all the changes. 🎉
 
-
+</br>
+</br>
+</br>
 
 ## API Quick Reference
 
@@ -233,7 +248,9 @@ Your AI agent will:
 | DELETE | `/api/comments/:id` | Delete comment |
 
 
-
+</br>
+</br>
+</br>
 
 ## Apply with Claude Code
 
@@ -254,7 +271,9 @@ Claude will:
 See [CLAUDE_CODE_INTEGRATION.md](comments-skill/CLAUDE_CODE_INTEGRATION.md) for details.
 
 
-
+</br>
+</br>
+</br>
 
 
 ## File Structure
@@ -286,7 +305,9 @@ Pointer/
 └── package-lock.json                # Root dependencies lock
 ```
 
-
+</br>
+</br>
+</br>
 
 
 ## Configuration
@@ -303,7 +324,9 @@ Edit `comments-skill/config.json`:
 ```
 
 
-
+</br>
+</br>
+</br>
 
 ## Storage
 
@@ -313,7 +336,9 @@ Edit `comments-skill/config.json`:
 Both are plain JSON — edit directly if needed.
 
 
-
+</br>
+</br>
+</br>
 
 
 ## Example Comment in comments.json
@@ -374,7 +399,9 @@ Both are plain JSON — edit directly if needed.
 ```
 
 
-
+</br>
+</br>
+</br>
 
 
 ## Example Pending Apply in pending-apply.json
@@ -413,7 +440,9 @@ Both are plain JSON — edit directly if needed.
 }
 ```
 
-
+</br>
+</br>
+</br>
 
 
 ## Workflow
@@ -425,7 +454,9 @@ Both are plain JSON — edit directly if needed.
 5. **Done** — AI replies appear, changes live, status → ✓
 
 
-
+</br>
+</br>
+</br>
 
 ## Why This Approach?
 
@@ -436,7 +467,9 @@ Both are plain JSON — edit directly if needed.
 - **Transparent** — See exactly what's being applied
 
 
-
+</br>
+</br>
+</br>
 
 ## Limitations
 
@@ -447,7 +480,9 @@ Both are plain JSON — edit directly if needed.
 
 
 
-
+</br>
+</br>
+</br>
 
 ## Troubleshooting
 
@@ -474,7 +509,9 @@ npm start
 - Verify paths in config are correct
 
 
-
+</br>
+</br>
+</br>
 
 ## Creator
 
@@ -483,14 +520,18 @@ npm start
 - 💼 [LinkedIn](https://www.linkedin.com/in/osamaeldrieny/)
 
 
-
+</br>
+</br>
+</br>
 
 ## License
 
 MIT
 
 
-
+</br>
+</br>
+</br>
 
 ## See Also
 
