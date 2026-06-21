@@ -895,39 +895,32 @@ const init = () => {
 
     /* ELEMENT HIGHLIGHT */
     .hct-highlight {
-      outline: none !important;
+      outline: 3px solid #2563eb !important;
+      outline-offset: -3px !important;
       background-color: rgba(37, 99, 235, 0.08) !important;
-      position: relative !important;
-      animation: hct-gradient-border 3s ease-in-out infinite !important;
+      animation: hct-border-color-gradient 3s ease-in-out infinite !important;
     }
 
-    .hct-highlight::before {
-      content: '' !important;
-      position: absolute !important;
-      top: -3px !important;
-      left: -3px !important;
-      right: -3px !important;
-      bottom: -3px !important;
-      border-radius: 2px !important;
-      padding: 3px !important;
-      background: linear-gradient(135deg, #2563eb, #9333ea, #2563eb) !important;
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
-      -webkit-mask-composite: xor !important;
-      mask-composite: exclude !important;
-      pointer-events: none !important;
-      z-index: -1 !important;
-      animation: hct-gradient-border 3s ease-in-out infinite !important;
-    }
-
-    @keyframes hct-gradient-border {
+    @keyframes hct-border-color-gradient {
       0% {
-        box-shadow: 0 0 8px rgba(37, 99, 235, 0.4), 0 0 16px rgba(37, 99, 235, 0.2) !important;
+        outline-color: #2563eb !important;
+        box-shadow: inset 0 0 0 3px #2563eb, 0 0 0 0 rgba(37, 99, 235, 0.5) !important;
+      }
+      25% {
+        outline-color: #7c3aed !important;
+        box-shadow: inset 0 0 0 3px #7c3aed, 0 0 0 3px rgba(124, 58, 237, 0.4) !important;
       }
       50% {
-        box-shadow: 0 0 16px rgba(147, 51, 234, 0.6), 0 0 24px rgba(147, 51, 234, 0.3) !important;
+        outline-color: #9333ea !important;
+        box-shadow: inset 0 0 0 3px #9333ea, 0 0 0 6px rgba(147, 51, 234, 0.3) !important;
+      }
+      75% {
+        outline-color: #7c3aed !important;
+        box-shadow: inset 0 0 0 3px #7c3aed, 0 0 0 3px rgba(124, 58, 237, 0.4) !important;
       }
       100% {
-        box-shadow: 0 0 8px rgba(37, 99, 235, 0.4), 0 0 16px rgba(37, 99, 235, 0.2) !important;
+        outline-color: #2563eb !important;
+        box-shadow: inset 0 0 0 3px #2563eb, 0 0 0 0 rgba(37, 99, 235, 0.5) !important;
       }
     }
 
