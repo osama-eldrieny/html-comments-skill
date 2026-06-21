@@ -62,6 +62,8 @@ Facilitate faster design reviews and feedback loops, reduce communication overhe
 git clone https://github.com/osama-eldrieny/Pointer.git
 ```
 
+---
+
 ### Step 2: Start the Comments Server (Terminal 1)
 
 Navigate to the skill folder and start the server:
@@ -81,6 +83,8 @@ You'll see:
 <div style="background-color: #fff3cd; border: 2px solid #ffc107; border-radius: 8px; padding: 12px 16px; margin: 16px 0;">
   <strong>⚠️ IMPORTANT: Keep this terminal open</strong> — the comments server must stay running for the bookmarklet to work.
 </div>
+
+---
 
 ### Step 3: Enable Comments (Choose One Method)
 
@@ -120,6 +124,8 @@ To make Pointer always open and survive page refreshes, add one of these script 
 </script>
 ```
 
+---
+
 ### Step 4: Open Your Project in the Browser
 
 **Open your Project HTML file in the browser** — either as a local server or directly:
@@ -128,6 +134,8 @@ To make Pointer always open and survive page refreshes, add one of these script 
 - **Your project:** Open your own HTML file or project URL
 - **Local server:** Open `http://localhost:8000`, `http://localhost:3000`, etc. (use whatever port your project runs on)
 - **Static file:** Open `file:///path/to/your/project.html` (open HTML file directly without a server)
+
+---
 
 ### Step 5: Start Commenting
 
@@ -138,6 +146,8 @@ To make Pointer always open and survive page refreshes, add one of these script 
 5. Type your feedback and submit
 6. See **numbered pins** appear on the element
 
+---
+
 ### Step 6: View & Manage Comments
 
 1. Click **"All Comments"** button in the toolbar
@@ -147,6 +157,8 @@ To make Pointer always open and survive page refreshes, add one of these script 
    - **Delete** comments you no longer need
    - **Read** full comment history with replies
 
+---
+
 ### Step 7: Queue Changes for your AI Agent
 
 When ready to apply a comment:
@@ -155,6 +167,8 @@ When ready to apply a comment:
 2. The status changes to **"Pending Apply"** (highlighted in yellow)
 3. If the comment has replies, you can mark individual replies instead
 4. The comment is now in the queue for your AI to process
+
+---
 
 ### Step 8: Apply Changes with your AI Agent
 
