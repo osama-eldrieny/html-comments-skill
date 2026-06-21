@@ -1275,7 +1275,7 @@ const renderSidebar = () => {
 
   html += `
     <div id="hct-global-counter">
-      <img id="hct-dog-mascot" src="http://localhost:8000/dog-mascot.png" alt="Pointer dog mascot">
+      <img id="hct-dog-mascot" src="http://localhost:8000/assets/images/pointer-icon.png" alt="Pointer dog mascot">
       <div id="hct-counter-text">
         <div>🌍 <span id="hct-counter-number">0</span> comments worldwide</div>
         <div id="hct-counter-credits">
@@ -1431,6 +1431,10 @@ const renderSidebar = () => {
       statusElement.className = `hct-comment-status ${statusClass}`;
       statusElement.textContent = statusText;
     }
+    const button = document.querySelector(`[data-reply-id="${replyId}"] .hct-comment-btn:first-of-type`);
+    if (button) {
+      button.textContent = newStatus === 'pending-apply' ? 'Cancel' : 'Ready to Apply';
+    }
   };
 
   window.HCT.toggleApply = (commentId) => {
@@ -1495,22 +1499,28 @@ const renderSidebar = () => {
     const comment = HCT.comments.find(c => c.id === commentId);
     if (!comment || !comment.replies) return;
 
-    const replyIndex = comment.replies.findIndex(r => r.id === replyId);
-    if (replyIndex === -1) return;
+    fetch(`${getBackendUrl()}/api/comments/${commentId}/reply/${replyId}`, {
+      method: 'DELETE'
+    })
+      .then(() => {
+        const replyIndex = comment.replies.findIndex(r => r.id === replyId);
+        if (replyIndex !== -1) {
+          comment.replies.splice(replyIndex, 1);
+        }
 
-    comment.replies.splice(replyIndex, 1);
-
-    const replyElement = document.querySelector(`[data-reply-id="${replyId}"]`);
-    if (replyElement) {
-      replyElement.style.opacity = '0';
-      replyElement.style.transition = 'opacity 0.2s ease';
-      setTimeout(() => {
-        replyElement.remove();
-        showToast('🗑️ Reply deleted', 'error');
-      }, 200);
-    } else {
-      showToast('🗑️ Reply deleted', 'error');
-    }
+        const replyElement = document.querySelector(`[data-reply-id="${replyId}"]`);
+        if (replyElement) {
+          replyElement.style.opacity = '0';
+          replyElement.style.transition = 'opacity 0.2s ease';
+          setTimeout(() => {
+            replyElement.remove();
+            showToast('🗑️ Reply deleted', 'error');
+          }, 200);
+        } else {
+          showToast('🗑️ Reply deleted', 'error');
+        }
+      })
+      .catch(() => showToast('Error deleting reply', 'error'));
   };
 
   window.HCT.toggleCommentCollapse = (commentId) => {
