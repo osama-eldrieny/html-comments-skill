@@ -896,8 +896,8 @@ const init = () => {
     /* ELEMENT HIGHLIGHT */
     .hct-highlight {
       outline: 3px dashed #2563eb !important;
-      outline-offset: -2px !important;
-      box-shadow: inset 0 0 19px 5px rgb(37 79 235 / 10%) !important;
+      outline-offset: 0px !important;
+      box-shadow: inset 0 0 19px 5px rgb(235 37 37 / 15%) !important;
     }
 
     /* COMMENT POPOVER */
