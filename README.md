@@ -24,10 +24,12 @@ Quick, targeted feedback directly on HTML elements. No lengthy descriptions—ju
 
 ## Why Pointer?
 
-Instead of lengthy feedback like:
-> *"Go to the contact page, find the header section, and change the title size to 24px"*
+**❌ The old way (lengthy and error-prone):**
+```
+Go to the contact page, find the header section, and change the title size to 24px
+```
 
-With Pointer, just:
+**✅ The Pointer way (precise and instant):**
 1. 🐕 Click the element
 2. 💬 Say "Make this 24px"
 3. ✨ Done — AI gets it instantly
