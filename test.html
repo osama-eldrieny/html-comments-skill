@@ -10,6 +10,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- HTML Comments Skill: Copy this script tag to your own HTML file if you want to use the comments feature.
+       Make sure the comments server is running on port 3001 before loading this page. -->
+
+
+     
+  
 
 
   <style>
@@ -786,91 +792,91 @@
 
         <!-- Additional Components Section -->
         <div class="mt-12 space-y-8">
-          <!-- Team Members Card -->
-          <div class="card">
-            <div class="card-header flex items-center justify-between">
-              <h2 class="card-title">Team Members</h2>
-              <button class="btn btn-primary btn-sm">
-                <svg class="w-4 h-4" data-lucide="plus" stroke="currentColor" stroke-width="2" fill="none"></svg>
-                Add Member
-              </button>
+          <!-- Team Members & Status Indicators Row -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Team Members Card -->
+            <div class="card lg:col-span-2">
+              <div class="card-header flex items-center justify-between">
+                <h2 class="card-title">Team Members</h2>
+                <button class="btn btn-primary btn-sm">
+                  <svg class="w-4 h-4" data-lucide="plus" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                  Add Member
+                </button>
+              </div>
+              <div class="card-content">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Role</th>
+                      <th>Status</th>
+                      <th>Tasks</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="flex items-center gap-3">
+                          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop" alt="John Doe" class="w-10 h-10 rounded-full object-cover">
+                          <div>
+                            <p class="font-semibold">John Doe</p>
+                            <p class="text-xs text-slate-500">john@example.com</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Project Lead</td>
+                      <td><span class="status-dot online"></span>Online</td>
+                      <td><span class="badge badge-primary">12 tasks</span></td>
+                      <td>
+                        <button class="btn btn-ghost" style="padding: 0.25rem 0.5rem;">
+                          <svg class="w-4 h-4" data-lucide="more-horizontal" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="flex items-center gap-3">
+                          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop" alt="Alice Roberts" class="w-10 h-10 rounded-full">
+                          <div>
+                            <p class="font-semibold">Alice Roberts</p>
+                            <p class="text-xs text-slate-500">alice@example.com</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Designer</td>
+                      <td><span class="status-dot away"></span>Away</td>
+                      <td><span class="badge badge-secondary">8 tasks</span></td>
+                      <td>
+                        <button class="btn btn-ghost" style="padding: 0.25rem 0.5rem;">
+                          <svg class="w-4 h-4" data-lucide="more-horizontal" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="flex items-center gap-3">
+                          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop" alt="Sarah Miller" class="w-10 h-10 rounded-full">
+                          <div>
+                            <p class="font-semibold">Sarah Miller</p>
+                            <p class="text-xs text-slate-500">sarah@example.com</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Developer</td>
+                      <td><span class="status-dot online"></span>Online</td>
+                      <td><span class="badge badge-success">15 tasks</span></td>
+                      <td>
+                        <button class="btn btn-ghost" style="padding: 0.25rem 0.5rem;">
+                          <svg class="w-4 h-4" data-lucide="more-horizontal" stroke="currentColor" stroke-width="2" fill="none"></svg>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <div class="card-content">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Role</th>
-                    <th>Status</th>
-                    <th>Tasks</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <div class="flex items-center gap-3">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop" alt="John Doe" class="w-10 h-10 rounded-full object-cover">
-                        <div>
-                          <p class="font-semibold">John Doe</p>
-                          <p class="text-xs text-slate-500">john@example.com</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>Project Lead</td>
-                    <td><span class="status-dot online"></span>Online</td>
-                    <td><span class="badge badge-primary">12 tasks</span></td>
-                    <td>
-                      <button class="btn btn-ghost" style="padding: 0.25rem 0.5rem;">
-                        <svg class="w-4 h-4" data-lucide="more-horizontal" stroke="currentColor" stroke-width="2" fill="none"></svg>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="flex items-center gap-3">
-                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop" alt="Alice Roberts" class="w-10 h-10 rounded-full">
-                        <div>
-                          <p class="font-semibold">Alice Roberts</p>
-                          <p class="text-xs text-slate-500">alice@example.com</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>Designer</td>
-                    <td><span class="status-dot away"></span>Away</td>
-                    <td><span class="badge badge-secondary">8 tasks</span></td>
-                    <td>
-                      <button class="btn btn-ghost" style="padding: 0.25rem 0.5rem;">
-                        <svg class="w-4 h-4" data-lucide="more-horizontal" stroke="currentColor" stroke-width="2" fill="none"></svg>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="flex items-center gap-3">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop" alt="Sarah Miller" class="w-10 h-10 rounded-full">
-                        <div>
-                          <p class="font-semibold">Sarah Miller</p>
-                          <p class="text-xs text-slate-500">sarah@example.com</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>Developer</td>
-                    <td><span class="status-dot online"></span>Online</td>
-                    <td><span class="badge badge-success">15 tasks</span></td>
-                    <td>
-                      <button class="btn btn-ghost" style="padding: 0.25rem 0.5rem;">
-                        <svg class="w-4 h-4" data-lucide="more-horizontal" stroke="currentColor" stroke-width="2" fill="none"></svg>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
 
-          <!-- Components Showcase -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <!-- Status & Indicators -->
             <div class="card">
               <div class="card-header">
@@ -904,23 +910,6 @@
                     <span class="status-dot away"></span>
                     <span class="text-sm font-medium">Maintenance</span>
                   </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Code Example -->
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Installation Guide</h3>
-              </div>
-              <div class="card-content">
-                <div class="code-block">
-npm install tailwindcss lucide-react
-npx tailwindcss init
-
-// In your HTML:
-&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;
-&lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt;
                 </div>
               </div>
             </div>
