@@ -1,8 +1,6 @@
-# 🐕 Pointer
+<img src="./assets/images/pointer-icon.png" alt="Pointer Logo" width="80" height="80">
 
-<div align="center">
-  <img src="./assets/images/pointer-icon.png" alt="Pointer Logo" width="120" height="120">
-</div>
+# 🐕 Pointer
 
 Quick, targeted feedback directly on HTML elements. No lengthy descriptions—just **click, comment, and sync with AI**.
 
