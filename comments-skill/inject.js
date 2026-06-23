@@ -913,7 +913,7 @@ const init = () => {
 
     /* COMMENT POPOVER */
     #hct-popover {
-      position: fixed;
+      position: absolute;
       background: white;
       border: 1px solid #e2e8f0;
       border-radius: 12px;
