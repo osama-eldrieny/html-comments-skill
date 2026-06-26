@@ -2,7 +2,9 @@
 
 ## What Was Fixed
 
-The SKILL.md file has been **completely reorganized and expanded** to explicitly guide Claude on the two distinct workflows: **Apply Pending Comments** and **Merge Comments**.
+The SKILL.md file (at `.claude/skills/pointer/SKILL.md`) has been **completely reorganized and expanded** to explicitly guide Claude on the two distinct workflows: **Apply Pending Comments** and **Merge Comments**.
+
+**Note:** This file is in `.gitignore` for now but contains all the critical logic Claude needs to handle the two workflows correctly.
 
 ### Before
 - ✗ Workflows were mixed together
@@ -140,6 +142,49 @@ Claude will ask for URL mappings when needed, handle ZIP extraction, deduplicate
 
 ---
 
+## Additional Updates (Phase 2)
+
+### 1. Explicit File Paths
+All file references updated to use `pointer/` prefix:
+- `pointer/comments-skill/pending-apply.json` ← Apply workflow
+- `pointer/comments-skill/comments.json` ← Both workflows
+- `pointer/comments-skill/url-mappings.json` ← Merge workflow
+- `pointer/comments-skill/import-staging/` ← Temporary folder during merge
+
+This ensures Claude uses correct paths when folder is renamed from `pointer2` to `pointer`.
+
+### 2. Clarified Merge Workflow "Do NOT" Rules
+Added explicit clarifications:
+
+```
+🔴 Do NOT (during merge):
+   - Edit HTML files
+   - Change comment status (preserve original status from ZIP)
+   - Apply pending comments
+   - Clear pending-apply.json
+```
+
+### 3. Enhanced Decision Tree
+Visual flowchart now shows:
+- Exact file paths for each workflow
+- Clear DO list
+- Clear DO NOT list
+- Expected results
+
+### 4. Detailed Example Conversations
+Step-by-step flows showing:
+- File paths being read/written
+- Exact operations Claude should perform
+- Questions to ask user (URL mappings)
+- Success messages with paths
+
+---
+
 ## Files Updated
 
-- `.claude/skills/pointer/SKILL.md` — Completely reorganized and expanded (~500 lines → ~400 lines, much clearer)
+- `.claude/skills/pointer/SKILL.md` — Completely reorganized and expanded with explicit paths and rules
+  - Workflow 1: Apply Pending Comments (10 detailed steps)
+  - Workflow 2: Merge Comments (10 detailed steps)
+  - Decision tree with file paths
+  - Example conversation flows
+  - Comprehensive troubleshooting
