@@ -396,7 +396,7 @@ Works on **any page** — not just localhost!
    - Type feedback: "Make this red", "Fix spacing", etc.
    - Submit your comment
 5. **Export comments** when done
-   - Click the **export icon** (📦) in the toolbar
+   - Click the **export icon** (⬇️) in the toolbar
    - Download the ZIP file (contains all comments)
 6. **Send the file to developer**
    - Share the ZIP file with front-end developer
