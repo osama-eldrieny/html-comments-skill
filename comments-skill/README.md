@@ -182,13 +182,13 @@ comments-skill/
     },
     {
       "id": "r_user_1",
-      "author": "Osama",
+      "author": "Team Member",
       "text": "Actually make it 15px",
       "status": "pending-apply"
     },
     {
       "id": "r_user_2",
-      "author": "Osama",
+      "author": "Team Member",
       "text": "looks not enough space, make it more",
       "status": "open"
     }
