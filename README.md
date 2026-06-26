@@ -366,74 +366,62 @@ Claude will:
 - Mark the comment/reply status as ✓ Applied
 
 **Refresh your browser** to see the changes.
-
-> 💡 **Pro tip:** If you want the browser to refresh automatically after applying comments, ask Claude to add a browser refresh step to the flow.
-
 **That's it!** Your HTML is now updated with all the changes. 🎉
 
 </br>
 </br>
 
-## New Features (v2.0)
+## Step 11: Team Collaboration — Add Comments on Live/Testing Servers
 
-### 🌐 Live URL Commenting
+Works on **any page** — not just localhost!
 
-The bookmarklet now works on **any page** — not just localhost!
+- ✅ Production sites (`https://www.yoursite.com`)
+- ✅ Testing servers (`https://testing.company.com`)
+- ✅ Staging servers (`https://staging.company.com`)
+- ✅ Development servers (`https://dev.company.com`)
+- ✅ Static files (`file:///path/to/page.html`)
 
-- ✅ Production sites
-- ✅ Dev/staging environments (https://dev.company.com)
-- ✅ Static HTML files (file://)
-- ✅ Any localhost port
+### Complete Team Workflow:
 
-Simply click the bookmarklet on any page and start commenting. Comments are saved to your local server.
+**Designer/QA adds comments on live server:**
 
-### 🗺️ Environment Mapping
+1. **Run Pointer server** (Steps 1-3 — same as always)
+2. **Open the live URL** in your browser
+   - Could be testing, staging, development, or production
+3. **Click the Pointer bookmark** (from your bookmarks bar)
+   - The Pointer toolbar appears on top-right
+   - Comments UI opens on right side
+4. **Start adding comments** on the live page
+   - Click any element to comment
+   - Type feedback: "Make this red", "Fix spacing", etc.
+   - Submit your comment
+5. **Export comments** when done
+   - Click the **export icon** (📦) in the toolbar
+   - Download the ZIP file (contains all comments)
+6. **Send the file to developer**
+   - Share the ZIP file with front-end developer
+   - They can apply the comments using Claude Code
 
-Same page served under different URLs? Pointer merges comments automatically.
+**Developer applies comments in their local code:**
 
-**Example:**
-- Dev version: `https://dev.company.com/dashboard`
-- Local version: `http://localhost:3000/dashboard`
+1. **Receive the ZIP file** from designer/QA
+2. **Tell Claude Code:** `merge comments`
+3. **Answer URL mapping question** (if needed)
+   - Claude asks: "testing.company.com maps to which local URL?"
+   - You answer: "localhost:3000" or similar
+4. **Comments merged** into your local project
+   - All team comments now visible in your local Pointer instance
+5. **Apply comments** when ready
+   - Tell Claude Code: `apply pending comments`
+   - Claude edits your HTML files with the changes
+   - Refresh to see changes live
 
-Set up a mapping group once, and comments from dev appear on localhost automatically.
-
-**How to use:**
-1. Click "🗺 Manage Mappings" link on the bookmarklet page
-2. Create a new group with both origins
-3. Comments from one origin appear on the other
-
-### 👥 Team Sync with Comments
-
-Share comments from your teammate's machine directly.
-
-**How it works:**
-1. Teammate clicks "📦 Export ZIP" on their mappings page
-2. Teammate shares the ZIP with you
-3. You tell Claude Code: `merge comments`
-4. Claude reads the SKILL.md and:
-   - Extracts comments from the ZIP
-   - Maps teammate's URLs to your local URLs (asks if new)
-   - Saves the mapping for future imports
-   - Merges all comments into your local project
-
-**Key benefit:** Comments stay private (no cloud upload). Mappings persist, so repeat imports are automatic.
-
-### 🏗️ Per-Project Setup
-
-Run Pointer inside each project for isolated comments:
-
-```bash
-# Project 1
-cd project-alpha
-pointer/comments-skill npm start    # :3001
-
-# In another terminal
-# Project 2
-cd project-beta
-pointer/comments-skill npm start    # :3001 (after closing project-alpha)
-```
-
-One bookmarklet works for all projects — comments are naturally isolated per project.
+**Key benefits:**
+- ✅ Comments stay private (no cloud upload)
+- ✅ Works on any environment (live, staging, dev, etc.)
+- ✅ Team can review without local setup
+- ✅ Developer applies all changes at once with Claude
+- ✅ Full conversation history preserved
 
 </br>
 </br>
