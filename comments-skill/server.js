@@ -17,20 +17,10 @@ const URL_MAPPINGS_FILE = path.join(__dirname, './url-mappings.json');
 app.use(cors({ origin: '*', methods: ['GET', 'POST', 'PATCH', 'DELETE'], allowedHeaders: ['Content-Type'] }));
 app.use(express.json({ limit: '10mb' }));
 
-// Serve favicon with long cache (7 days)
-app.get('/favicon.ico', (req, res) => {
-  const faviconPath = path.join(__dirname, '..', 'favicon.ico');
-  if (fs.existsSync(faviconPath)) {
-    res.set('Cache-Control', 'public, max-age=604800'); // 7 days
-    res.sendFile(faviconPath);
-  } else {
-    res.status(404).send('Favicon not found');
-  }
-});
-
+// Cache static files (including favicon) for 7 days
 app.use(express.static(path.join(__dirname, '..'), {
   setHeaders: (res, path) => {
-    if (path.endsWith('.ico') || path.endsWith('favicon.ico')) {
+    if (path.endsWith('.ico')) {
       res.set('Cache-Control', 'public, max-age=604800'); // 7 days
     }
   }

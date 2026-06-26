@@ -486,10 +486,7 @@ Pointer/
 │
 ├── assets/
 │   └── images/
-│       ├── pointer-icon.png         # Main icon (draggable bookmark)
-│       ├── pointer-icon-16.png      # Small icon variant
-│       ├── pointer-icon-favicon.png # Favicon for bookmarklet page
-│       └── favicon.ico              # Standard favicon
+│       └── pointer-icon.png         # Main logo (used in README)
 │
 ├── test.html                        # Example/demo page
 ├── README.md                        # Main documentation
