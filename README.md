@@ -82,9 +82,11 @@ pointer/
 
 ## Features
 
-✨ **Bookmarklet-based** — Works on any localhost HTML page or static HTML file  
+✨ **Bookmarklet-based** — Works on **any page** (localhost, live sites, static files)  
 - **Localhost:** `http://localhost:3000`, `http://localhost:8000`, etc.
+- **Live URLs:** `https://www.yoursite.com`, `https://staging.yoursite.com`, etc.
 - **Static HTML:** `file:///path/to/your/page.html`
+- **Dev/Staging:** Works on any environment (dev, staging, production)
 
 💾 **File-based storage** — Comments saved as plain JSON (no database needed)  
 🎯 **Element selection** — Click any element to attach feedback  
@@ -93,6 +95,8 @@ pointer/
 📝 **Threaded replies** — Discuss changes in context before applying  
 🎨 **Visual highlighting** — See which elements have comments  
 📍 **Pin positions** — Comments follow elements during scroll/zoom  
+🗺️ **Environment mapping** — Same comments across different URLs (dev ↔ localhost)  
+👥 **Team sync** — Share comments with teammates via ZIP export/import  
 
 </br>
 </br>
