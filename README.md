@@ -412,16 +412,16 @@ For Front-end Developers applying team feedback in local code:
 1. **Receive the ZIP file** from designer/QA
 
 2. **Upload ZIP and tell Claude Code:** `merge comments`
-   - In Claude Code, upload the ZIP file from designer/QA
-   - Or paste the file path so Claude can find it
+   - In Claude Code, upload the ZIP file you got it from team mate and ask claude to "Merge Comments"
    - Claude will extract the ZIP and process the comments
 
 3. **Answer URL mapping question** (if needed)
    - Claude asks: "testing.company.com maps to which local URL?"
    - You answer: "localhost:3000" or similar
 
-4. **Comments merged** into your local project
-   - All team comments now visible in your local Pointer instance
+4. **Claude merges the comments** into your local project
+   - Claude processes the ZIP and merges all team comments
+   - Refresh your browser to see your teammate's comments added to Pointer
 
 5. **Apply comments** when ready
    - Tell Claude Code: `apply pending comments`
