@@ -168,6 +168,11 @@ npm install
 npm start
 ```
 
+**Or, run it as a single command:**
+```bash
+cd Pointer/comments-skill && npm install && npm start
+```
+
 You'll see:
 ```
 🎯 HTML Comments server running at http://localhost:3001
